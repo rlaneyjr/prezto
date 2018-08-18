@@ -2,62 +2,185 @@
 # Executes commands at login pre-zshrc.
 #
 # Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Ricky Laney <rlaneyjr@gmail.com>
 #
+########## Profiler ###########
+# Credit: https://kev.inburke.com/kevin/profiling-zsh-startup-time/
 
-#
+#PROFILE_STARTUP=true
+#if [[ "$PROFILE_STARTUP" == true ]]; then
+#    zmodload zsh/zprof # Output load-time statistics
+#    # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+#    PS4=$'%D{%M%S%.} %N:%i> '
+#    exec 3>&2 2>"${XDG_CACHE_HOME:-$HOME/temp}/zsh_startup.$$"
+#    setopt xtrace prompt_subst
+#fi
+########################################
+#            Load First                #
+########################################
+# Stuff that needs to be loaded first due to dependencies.
+export ZSH_CUSTOM=$HOME/.zsh
+export TERM='xterm-256color'
+#export TERM='screen-256color'
+
 # Browser
-#
-
 if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
 fi
 
-#
-# Editors
-#
-
-export EDITOR='nano'
-export VISUAL='nano'
+# Make vim the default editor.
+export EDITOR='vim'
+export VISUAL='vim'
 export PAGER='less'
 
-#
 # Language
-#
-
+# Prefer US English and use UTF-8.
 if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
 fi
+if [[ -z "$LC_ALL" ]]; then
+  export LC_ALL='en_US.UTF-8'
+fi
+# Set architecture flags
+if [[ -z "$ARCHFLAGS" ]]; then
+  export ARCHFLAGS='-arch x86_64'
+fi
 
-#
 # Paths
-#
-
 # Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
+typeset -gU cdpath fpath mailpath path manpath
 
 # Set the list of directories that cd searches.
-# cdpath=(
-#   $cdpath
-# )
+cdpath=(
+  /Users/rlaney
+  /Users/rlaney/{repos,Projects}
+  $cdpath
+)
 
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
+  /Applications
+  /Users/rlaney/{bin,lib,scripts}
   $path
 )
+# Bring in my path settings
+source $HOME/.zshenv
 
-#
+# Load my private stuff
+[[ -f ~/.ssh/.private ]] && source ~/.ssh/.private
+
+# load our own completion functions removed (~/.zsh/completion)
+fpath=(~/.zsh/completion,
+        /usr/local/share/zsh-completions,
+        /usr/local/share/zsh/functions,
+        /usr/local/share/zsh/site-functions,
+        $fpath)
+
 # Less
-#
-
 # Set the default Less options.
 # Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
 # Remove -X and -F (exit if the content fits on one screen) to enable it.
-export LESS='-F -g -i -M -R -S -w -X -z-4'
+#export LESS='-F -g -i -M -R -S -w -X -z-4'
+export LESS='-g -i -M -R -S -w -z-4'
+
+# Get color support for 'less'
+export LESS="--RAW-CONTROL-CHARS"
+export LESS='--ignore-case --raw-control-chars'
+# Load LESS_TERMCAP color variables for less, man, etc., colorful
+[[ -f ~/.LESS_TERMCAP ]] && source ~/.LESS_TERMCAP
 
 # Set the Less input preprocessor.
 # Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
+
+############################################################
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+# Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
+export PYTHONIOENCODING='UTF-8';
+typeset -Ug PYTHONPATH
+export PYTHONPATH="$HOME/lib:$PYTHONPATH"
+# Needed before installing Python versions with pyenv for YouCompleteMe
+export PYTHON_CONFIGURE_OPTS="--enable-framework"
+
+# Virtual Environment
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Projects
+#export VIRTUALENVWRAPPER_PYTHON="$PYENV_ROOT/shims/python"
+#source /usr/local/bin/virtualenvwrapper.sh
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+# Directory to create environment for python3 -m venv
+#export ENV_DIR=$HOME/.virtualenvs
+
+# Pyenv auto-activation
+export PYENV_SHELL="$(which zsh)"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+#export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
+pyenv virtualenvwrapper_lazy
+#if which pyenv virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+#export PYENV_DEBUG=1
+#PYENV_ROOT
+#PYENV_SHELL
+#PYENV_VIRTUALENVWRAPPER_PYENV_VERSION
+#PYENV_VIRTUALENV_DISABLE_PROMPT
+#PYENV_VIRTUALENV_INIT
+
+# PIPENV Settings
+#eval "$(pipenv --completion)"
+export PIPENV_PYTHON=$PYENV_ROOT/shims/python
+export PIPENV_SHELL="$(which zsh)"
+#export PIPENV_NO_INHERIT
+export PIPENV_VIRTUALENV="$WORKON_HOME"
+#export PIPENV_MAX_SUBPROCESS
+#export PIPENV_MAX_RETRIES
+#export PIPENV_USE_SYSTEM
+#export PIPENV_TEST_INDEX
+#export PIPENV_MAX_ROUNDS
+#export PIPENV_USE_HASHES
+#export PIPENV_YES
+#export PIPENV_DONT_USE_PYENV
+#export PIPENV_SKIP_VALIDATION
+# Use this version of Python when creating new virtual environments, by default (e.g. 3.6).
+#export PIPENV_DEFAULT_PYTHON_VERSION
+# Always use fancy mode when invoking pipenv shell.
+export PIPENV_SHELL_FANCY=1
+# If set, use .venv in your project directory instead of the global virtualenv manager pew.
+#export PIPENV_VENV_IN_PROJECT
+# Disable terminal colors, for some reason.
+#export PIPENV_COLORBLIND
+# Disable terminal spinner, for cleaner logs. Automatically set in CI environments.
+#export PIPENV_NOSPIN
+# Set to an integer for the maximum number of directories to recursively search for a Pipfile.
+#export PIPENV_MAX_DEPTH
+# Set to an integer for the max number of seconds Pipenv will wait for virtualenv creation to complete. Defaults to 120 seconds.
+#export PIPENV_TIMEOUT
+# Set to an integer for the max number of seconds Pipenv will wait for package installation before timing out. Defaults to 900 seconds.
+#export PIPENV_INSTALL_TIMEOUT
+# Set to disable automatically using an activated virtualenv over the current project’s own virtual environment.
+#export PIPENV_IGNORE_VIRTUALENVS
+# When running pipenv from a $PWD other than the same directory where the Pipfile is located, instruct pipenv to find the Pipfile in the location specified by this environment variable.
+#export PIPENV_PIPFILE
+# Location for Pipenv to store it’s package cache.
+#export PIPENV_CACHE_DIR
+# Disable emojis in output.
+#export PIPENV_HIDE_EMOJIS
+# Location for Pipenv to load your project’s .env.
+#export PIPENV_DOTENV_LOCATION
+# Tell Pipenv not to load the .env files automatically.
+#export PIPENV_DONT_LOAD_ENV
+# If you’d like to set these environment variables on a per-project basis, I recommend utilizing the fantastic direnv project, in order to do so.
+# Also note that pip itself supports environment variables, if you need additional customization.
+# For example:
+# $ PIP_INSTALL_OPTION="-- -DCMAKE_BUILD_TYPE=Release" pipenv install -e .
+
+# Powerline setup
+#powerline-daemon -q
+#POWERLINE_SHELL_CONTINUATION=1
+#POWERLINE_SHELL_SELECT=1
+#. /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh

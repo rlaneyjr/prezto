@@ -2,7 +2,7 @@
 # Executes commands at the start of an interactive session.
 #
 # Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Ricky Laney <rlaneyjr@gmail.com>
 #
 
 # Source Prezto.
@@ -11,3 +11,283 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+##############################################
+#		        Custom Config                #
+##############################################
+# Base16 Shell
+#BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
+#[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+# Base16 Shell
+#BASE16_SHELL="$HOME/.config/base16/base16-shell/"
+#[ -n "$PS1" ] && \
+#    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+#        eval "$("$BASE16_SHELL/profile_helper.sh")"
+
+# pandoc completion
+eval $(pandoc --bash-completion)
+
+# pip zsh completion
+eval "`pip completion --zsh`"
+compctl -K _pip_completion pip3
+
+# KubeCTL Completions for ZSH
+source <(kubectl completion zsh)
+# KubeCTL Completions for BASH
+#source <(kubectl completion bash)
+
+# AWS-CLI completer
+#if [ -f /usr/local/bin/aws_zsh_completer.sh]; then
+#    source /usr/local/bin/aws_zsh_completer.sh
+#fi
+#if [ -f /usr/local/bin/aws_completer.sh]; then
+#    source /usr/local/bin/aws_completer.sh
+#fi
+#source /usr/local/bin/aws_zsh_completer.sh
+#source /usr/local/bin/aws_completer
+
+#Add the following to your ~/.bash_profile:
+#if [ -f /usr/local/share/bash-completion/bash_completion ]; then
+#  . /usr/local/share/bash-completion/bash_completion
+#fi
+
+# Add tab completion for many Bash commands
+#if which brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
+#	source "$(brew --prefix)/share/bash-completion/bash_completion";
+#elif [ -f /etc/bash_completion ]; then
+#	source /etc/bash_completion;
+#fi;
+
+# Homebrew completion
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
+# Enable tab completion for `g` by marking it as an alias for `git`
+if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+	compctl -o default -o nospace -F _git g;
+fi;
+
+# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+[ -e "$HOME/.ssh/config" ] && compctl -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+
+# Make zsh know about hosts already accessed by SSH
+zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+
+# Add tab completion for `defaults read|write NSGlobalDomain`
+# You could just use `-g` instead, but I like being explicit
+compctl -W "NSGlobalDomain" defaults;
+
+# Add `killall` tab completion for common apps
+compctl -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal iTerm2" killall;
+
+# Set iterm hostname prior to script to speed-up.
+ITERM2_HOSTNAME='flypro'
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# maintains a jump-list of the directories you actually use
+#. /usr/local/etc/profile.d/z.sh
+
+# Setup pyenv custom prompt "zsh-python-prompt"
+source $ZSH_CUSTOM/zshrc.zsh
+RPROMPT+='$ZSH_PYTHON_PROMPT'
+setopt prompt_subst
+#zstyle ':zsh-python-prompt:pyenv:' expire_sec 30
+#zstyle ':zsh-python-prompt:pyenv:' symbol '⌘'
+zstyle ':zsh-python-prompt:pyenv:' symbol '🐍'
+
+# Plugin to read Vim help files
+source $ZSH_CUSTOM/vimman.zsh
+zstyle ':completion:*' use-cache yes
+zstyle ':vimman:' dir ~/.vim/plugged
+zstyle ':vimman:' verbose yes
+zstyle ':vimman:' expire 7
+# Note that if you change the zstyle settings, you should delete the cache file and restart zsh.
+# $ rm ~/.zcompcache/vimman
+# $ exec zsh
+
+# completion
+autoload -U compinit -u
+compinit -u
+
+# makes color constants available
+autoload -U colors
+colors
+
+# Loading Prompts
+autoload -U promptinit; promptinit
+
+# enable colored output from ls, etc. on FreeBSD-based systems
+export CLICOLOR=1
+
+# Increase Bash history size. Allow 32³ entries; the default is 500.
+export HISTSIZE='32768';
+export HISTFILESIZE="${HISTSIZE}";
+# Omit duplicates and commands that begin with a space from history.
+export HISTCONTROL='ignoreboth';
+HISTFILE=$HOME/.zsh_history
+DIRSTACKSIZE=5
+
+setopt complete_aliases
+setopt no_bg_nice
+setopt no_hup
+setopt no_list_beep
+setopt local_options
+setopt local_traps
+#setopt ignore_eof
+
+# vi mode
+setopt vi
+
+# awesome cd movements from zshkit
+setopt autocd autopushd pushdminus pushdsilent pushdtohome cdablevars
+# Alias directories by assigning them to a variable
+#setopt auto_name_dirs
+# This allows us to omit the $ when cding into the directory variable
+#setopt cdable_varS
+
+# ===== Basics
+# don't beep on error
+setopt no_beep
+# Allow comments even in interactive shells (especially for Muness)
+setopt interactive_comments
+
+# ===== Changing Directories
+# If you type foo, and it isn't a command, and it is a directory in your cdpath, go there
+setopt auto_cd
+# if argument to cd is the name of a parameter whose value is a valid directory, it will become the current directory
+setopt cdablevarS
+# don't push multiple copies of the same directory onto the directory stack
+setopt pushd_ignore_dups
+
+# ===== Expansion and Globbing
+# treat #, ~, and ^ as part of patterns for filename generation
+setopt extended_glob
+# Allow [ or ] wherever you want
+unsetopt nomatch
+
+# ===== History
+# Allow multiple terminal sessions to all append to one zsh command history
+setopt append_history
+# save timestamp of command and duration
+setopt extended_history
+# Add comamnds as they are typed, don't wait until shell exit
+setopt inc_append_history
+# when trimming history, lose oldest duplicates first
+setopt hist_expire_dups_first
+# Do not write events to history that are duplicates of previous events
+setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+# remove command line from history list when first character on the line is a space
+setopt hist_ignore_space
+# When searching history don't display results already cycled through twice
+setopt hist_find_no_dups
+# Remove extra blanks from each command line being added to history
+setopt hist_reduce_blanks
+# don't execute, just expand history
+setopt hist_verify
+# imports new commands and appends typed commands to history
+setopt share_history
+
+# ===== Completion
+# When completing from the middle of a word, move the cursor to the end of the word
+setopt always_to_end
+# show completion menu on successive tab press. needs unsetop menu_complete to work
+setopt auto_menu
+# any parameter that is set to the absolute name of a directory immediately becomes a name for that directory
+setopt auto_name_dirs
+# Allow completion from within a word/phrase
+setopt complete_in_word
+
+# do not autoselect the first completion entry
+unsetopt menu_complete
+
+# ===== Correction
+# spelling correction for arguments
+unsetopt correct_all
+# spelling correction for commands
+setopt correct
+
+# ===== Prompt
+# Enable parameter expansion, command substitution, and arithmetic expansion in the prompt
+setopt prompt_subst # Make sure prompt is able to be generated properly.
+# only show the rprompt on the current prompt
+#setopt transient_rprompt
+
+# ===== Scripts and Functions
+# perform implicit tees or cats when multiple redirections are attempted
+setopt multios
+
+# vi mode
+bindkey -v
+bindkey "^F" vi-cmd-mode
+
+# handy keybindings
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+bindkey "^K" kill-line
+bindkey "^R" history-incremental-search-backward
+bindkey "^P" history-search-backward
+bindkey "^Y" accept-and-hold
+bindkey "^N" insert-last-word
+bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
+
+globalias() {
+   zle _expand_alias
+   zle expand-word
+   zle self-insert
+}
+zle -N globalias
+# control-space expands all aliases, including global
+bindkey -M emacs "^ " globalias
+bindkey -M viins "^ " globalias
+# space to make a normal space
+bindkey -M emacs " " magic-space
+bindkey -M viins " " magic-space
+# normal space during searches
+bindkey -M isearch " " magic-space
+
+# load custom executable functions
+if [ -f ~/.myshutils ]; then
+   . ~/.myshutils
+fi
+if [ -f ~/.myfuncts ]; then
+   . ~/.myfuncts
+fi
+
+## load custom executable functions
+#for function in ~/.zsh/functions/*; do
+#  source $function
+#done
+
+# aliases
+[[ -f ~/.aliases ]] && source ~/.aliases
+
+# New Fuzzy Finder from command line
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# New Fuzzy Finder with my custom config
+[ -f ~/.fzf.local ] && source ~/.fzf.local
+
+# (eval):setopt:3: no such option: NO_warnnestedvar
+# fix: (eval):setopt:3: no such option: NO_warnnestedvar
+#_comp_options="${_comp_options/NO_warnnestedvar/}"
+
+# OPAM configuration
+. $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# Initialize jenv Java Manager
+eval "$(jenv init -)"
+
+# Initialize direnv the environment variables manager
+eval "$(direnv hook zsh)"
+
+# Pyenv auto-activation
+#eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
+#if which pyenv virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+########## Profiler ###########
+#if [[ "$PROFILE_STARTUP" == true ]]; then
+#    zprof
+#    unsetopt xtrace
+#    exec 2>&3 3>&-
+#fi
