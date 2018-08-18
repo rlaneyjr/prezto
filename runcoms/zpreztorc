@@ -34,15 +34,21 @@ zstyle ':prezto:load' pmodule \
   'osx' \
   'tmux' \
   'git' \
+  'rsync' \
+  'archive' \
+  'python' \
+  'node' \
   'docker' \
   'syntax-highlighting' \
   'history-substring-search' \
+  'autosuggestions' \
+  'command-not-found' \
   'prompt'
 
 # Autosuggestions
 #
 # Set the query found color.
-# zstyle ':prezto:module:autosuggestions:color' found ''
+zstyle ':prezto:module:autosuggestions:color' found ''
 
 # Completions
 #
@@ -53,7 +59,7 @@ zstyle ':prezto:load' pmodule \
 # Editor
 #
 # Set the key mapping style to 'emacs' or 'vi'.
-zstyle ':prezto:module:editor' key-bindings 'vi'
+zstyle ':prezto:module:editor' key-bindings 'emacs'
 # Auto convert .... to ../..
 zstyle ':prezto:module:editor' dot-expansion 'yes'
 # Allow the zsh prompt context to be shown.
@@ -72,11 +78,11 @@ zstyle ':prezto:module:editor' ps-context 'yes'
 # History Substring Search
 #
 # Set the query found color.
-# zstyle ':prezto:module:history-substring-search:color' found ''
+zstyle ':prezto:module:history-substring-search:color' found ''
 # Set the query not found color.
-# zstyle ':prezto:module:history-substring-search:color' not-found ''
+zstyle ':prezto:module:history-substring-search:color' not-found ''
 # Set the search globbing flags.
-# zstyle ':prezto:module:history-substring-search' globbing-flags ''
+zstyle ':prezto:module:history-substring-search' globbing-flags ''
 
 # macOS
 #
@@ -125,7 +131,7 @@ zstyle ':prezto:module:python:virtualenv' initialize 'yes'
 # SSH
 #
 # Set the SSH identities to load into the agent.
-zstyle ':prezto:module:ssh:load' identities 'cloud_id' 'id_rsa' 'ssh_rsa' 'het_rsa' 'HSC-ETNOC'
+#zstyle ':prezto:module:ssh:load' identities 'cloud_id' 'id_rsa' 'ssh_rsa' 'het_rsa' 'HSC-ETNOC'
 
 # Syntax Highlighting
 #
@@ -145,7 +151,7 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
 #  'function' 'bg=blue'
 # Set syntax pattern styles.
 zstyle ':prezto:module:syntax-highlighting' pattern \
-  'rm*-rf*' 'fg=white,bold,bg=red'
+  'rm*-rf*' 'fg=red,bold,bg=black'
 
 # Terminal
 #
@@ -163,11 +169,11 @@ zstyle ':prezto:module:syntax-highlighting' pattern \
 # Auto start a session when Zsh is launched in a local terminal.
 #zstyle ':prezto:module:tmux:auto-start' local 'yes'
 # Auto start a session when Zsh is launched in a SSH connection.
-zstyle ':prezto:module:tmux:auto-start' remote 'yes'
+#zstyle ':prezto:module:tmux:auto-start' remote 'yes'
 # Integrate with iTerm2.
 zstyle ':prezto:module:tmux:iterm' integrate 'yes'
 # Set the default session name:
-zstyle ':prezto:module:tmux:session' name '0'
+#zstyle ':prezto:module:tmux:session' name '0'
 
 # Utility
 #
