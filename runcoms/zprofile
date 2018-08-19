@@ -4,6 +4,38 @@
 # Authors:
 #   Ricky Laney <rlaneyjr@gmail.com>
 #
+# ### zprofile
+# 
+# This file is similar to zlogin, but it is sourced before zshrc. It was added
+# for [KornShell][1] fans. See the description of zlogin below for what it may
+# contain.
+# 
+# zprofile and zlogin are not meant to be used concurrently but can be done so.
+########################################
+# ### zlogin
+# 
+# This file is sourced by login shells after zshrc, and thus, it should contain
+# commands that need to execute at login. It is usually used for messages such as
+# [fortune][2], [msgs][3], or for the creation of files.
+# 
+# This is not the file to define aliases, functions, shell options, and key
+# bindings. It should not change the shell environment.
+########################################
+# The configuration files are read in the following order:
+# 
+#   01. /etc/zshenv
+#   02. ~/.zshenv
+#   03. /etc/zprofile
+#   04. ~/.zprofile
+#   05. /etc/zshrc
+#   06. ~/.zshrc
+#   07. ~/.zpreztorc
+#   08. /etc/zlogin
+#   09. ~/.zlogin
+#   10. ~/.zlogout
+#   11. /etc/zlogout
+########################################
+
 ########## Profiler ###########
 # Credit: https://kev.inburke.com/kevin/profiling-zsh-startup-time/
 
@@ -52,30 +84,53 @@ typeset -gU cdpath fpath mailpath path manpath
 
 # Set the list of directories that cd searches.
 cdpath=(
-  /Users/rlaney
-  /Users/rlaney/{repos,Projects}
-  $cdpath
+    /Users/rlaney
+    /Users/rlaney/{repos,Projects}
+    $cdpath
 )
 
 # Set the list of directories that Zsh searches for programs.
 path=(
-  /usr/local/{bin,sbin}
-  /Applications
-  /Users/rlaney/{bin,lib,scripts}
-  $path
+    /usr/local/{bin,sbin}
+    /Applications
+    /Users/rlaney/{bin,lib,scripts}
+    $HOME/bin
+    $HOME/lib
+    $HOME/scripts
+    $HOME/.jenv/bin
+    $HOME/.rvm/bin
+    /usr/local/opt/icu4c/bin
+    /usr/local/opt/icu4c/sbin
+    /usr/local/opt/tcl-tk/bin
+    /usr/local/opt/sqlite/bin
+    /usr/local/opt/libxml2/bin
+    /usr/local/opt/go/libexec/bin
+    $HOME/.go/bin
+    /usr/local/opt/bison/bin
+    /usr/local/opt/qt/bin
+    /usr/local/opt/ncurses/bin
+    /usr/local/opt/openssl/bin
+    /opt/X11/bin
+    /Applications/VMware Fusion.app/Contents/Library
+    $path
 )
-# Bring in my path settings
-source $HOME/.zshenv
 
-# Load my private stuff
-[[ -f ~/.ssh/.private ]] && source ~/.ssh/.private
+# load our own completions (~/.zsh/completion)
+fpath=(
+    $HOME/.zsh/completion
+    /usr/local/share/cmake/completions
+    /usr/local/share/bash-completion
+    /usr/local/share/bash-completion/bash-completion
+    /usr/local/share/bash-completion/completions
+    /usr/local/share/the_silver_searcher/completions
+    /usr/local/share/zsh/functions
+    /usr/local/share/zsh/site-functions
+    /usr/local/share/zsh-completions
+    $fpath
+)
 
-# load our own completion functions removed (~/.zsh/completion)
-fpath=(~/.zsh/completion,
-        /usr/local/share/zsh-completions,
-        /usr/local/share/zsh/functions,
-        /usr/local/share/zsh/site-functions,
-        $fpath)
+# enable colored output from ls, etc. on FreeBSD-based systems
+export CLICOLOR=1
 
 # Less
 # Set the default Less options.
@@ -95,6 +150,11 @@ export LESS='--ignore-case --raw-control-chars'
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
+
+############################################################
+# Don’t clear the screen after quitting a manual page.
+export MANPAGER='less -X';
+export MANPATH="$MANPATH:/usr/local/man"
 
 ############################################################
 export PYENV_ROOT="$HOME/.pyenv"
@@ -184,3 +244,88 @@ export PIPENV_SHELL_FANCY=1
 #POWERLINE_SHELL_CONTINUATION=1
 #POWERLINE_SHELL_SELECT=1
 #. /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+
+############################################################
+# Ensure go has it's GOROOT loaded
+typeset -Ug GOPATH
+export GOPATH="$HOME/.go"
+##export PATH="/usr/local/opt/go/libexec/bin:$PATH"
+# Go Code bin commands
+##export PATH="$HOME/.go/bin:$PATH"
+
+############################################################
+# Node Version Manager
+#Add the following to ~/.zshrc or your desired shell
+#configuration file:
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+# Enable persistent REPL history for `node`.
+export NODE_REPL_HISTORY="$HOME/.node_history"
+# Allow 32³ entries; the default is 1000.
+export NODE_REPL_HISTORY_SIZE="32768"
+# Use sloppy mode by default, matching web browsers.
+export NODE_REPL_MODE="sloppy"
+
+############################################################
+# Atom Environment Variables:
+# The path from which Atom loads source code in dev mode.
+# Defaults to `~/github/atom`.
+export ATOM_DEV_RESOURCE_PATH="$HOME/.atom/dev"
+# The root path for all configuration files and folders.
+# Defaults to `~/.atom`.
+export ATOM_HOME="$HOME/.atom"
+
+############################################################
+# User specified directories.  Can be overriden with local command.
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+############################################################
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '$HOME/Projects/Cloud/Google/google-cloud-sdk/path.zsh.inc' ];
+then source '$HOME/Projects/Cloud/Google/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '$HOME/Projects/Cloud/Google/google-cloud-sdk/completion.zsh.inc' ];
+then source '$HOME/Projects/Cloud/Google/google-cloud-sdk/completion.zsh.inc'; fi
+
+############################################################
+# Add RVM to PATH for scripting
+if [[ -f $HOME/.rvmrc ]]; then
+    source $HOME/.rvmrc;
+fi
+
+# Load RVM into a shell session *as a function*
+# RVM home scripts completion
+[[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+#if [[ -d $HOME/.rvm/bin ]]; then
+#    export PATH="$PATH:$HOME/.rvm/bin"
+#fi
+
+############################################################
+# Cheats customizations
+CHEATERS="$HOME/cheaters/cheaters"
+export CHEAT_EDITOR="vim"
+export DEFAULT_CHEAT_DIR="$HOME/.cheat/cheat/cheatsheets"
+#export CHEATPATH="$CHEATERS/CheatenLife:$CHEATERS/CloudLife:$CHEATERS/FlyinLife
+#                 :$CHEATERS/MayccollLife:$CHEATERS/PacketLife:$CHEATERS/PerlLife
+#                 :$CHEATERS/PythonLife:$CHEATERS/VMwareLife"
+export CHEATCOLORS=true
+# Specifying a Syntax Highlighter
+# You may manually specify which syntax highlighter to use for each cheatsheet by wrapping the sheet's contents in a Github-Flavored Markdown code-fence.
+# Example:
+#
+# ```sql
+# -- to select a user by ID
+# SELECT *
+# FROM Users
+# WHERE id = 100
+# ```
+# If no syntax highlighter is specified, the bash highlighter will be used by default.
+
+############################################################
+# Ansible Environment
+#export ANSIBLE_CONFIG=$HOME/Projects/ansible.cfg
+#export ANSIBLE_LIBRARY=$HOME/Projects/ansible-cisco-snmp/library
+

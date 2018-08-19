@@ -4,6 +4,25 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
+# ### zlogout
+# 
+# This file is sourced by login shells during logout. It should be used for
+# displaying messages and the deletion of files.
+########################################
+# The configuration files are read in the following order:
+# 
+#   01. /etc/zshenv
+#   02. ~/.zshenv
+#   03. /etc/zprofile
+#   04. ~/.zprofile
+#   05. /etc/zshrc
+#   06. ~/.zshrc
+#   07. ~/.zpreztorc
+#   08. /etc/zlogin
+#   09. ~/.zlogin
+#   10. ~/.zlogout
+#   11. /etc/zlogout
+########################################
 
 # Execute code only if STDERR is bound to a TTY.
 [[ -o INTERACTIVE && -t 2 ]] && {

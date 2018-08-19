@@ -4,6 +4,24 @@
 # Authors:
 #   Ricky Laney <rlaneyjr@gmail.com>
 #
+# ### zpreztorc
+# 
+# This file configures Prezto. Should ONLY contain Prezto settings!
+########################################
+# The configuration files are read in the following order:
+# 
+#   01. /etc/zshenv
+#   02. ~/.zshenv
+#   03. /etc/zprofile
+#   04. ~/.zprofile
+#   05. /etc/zshrc
+#   06. ~/.zshrc
+#   07. ~/.zpreztorc
+#   08. /etc/zlogin
+#   09. ~/.zlogin
+#   10. ~/.zlogout
+#   11. /etc/zlogout
+########################################
 
 # General
 #
@@ -23,32 +41,22 @@ zstyle ':prezto:*:*' color 'yes'
 # The order matters.
 zstyle ':prezto:load' pmodule \
   'environment' \
-  'terminal' \
   'editor' \
-  'history' \
   'directory' \
   'spectrum' \
-  'utility' \
   'completion' \
-  'homebrew' \
-  'osx' \
   'tmux' \
   'git' \
   'rsync' \
   'archive' \
-  'python' \
-  'node' \
-  'docker' \
   'syntax-highlighting' \
   'history-substring-search' \
-  'autosuggestions' \
-  'command-not-found' \
   'prompt'
 
 # Autosuggestions
 #
 # Set the query found color.
-zstyle ':prezto:module:autosuggestions:color' found ''
+#zstyle ':prezto:module:autosuggestions:color' found ''
 
 # Completions
 #
@@ -68,7 +76,12 @@ zstyle ':prezto:module:editor' ps-context 'yes'
 # Git
 #
 # Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
-#zstyle ':prezto:module:git:status:ignore' submodules 'untracked'
+zstyle ':prezto:module:git:status:ignore' submodules 'all'
+#zstyle ':prezto:module:git:alias' skip 'yes'
+# The format of the [git-log][8] output is configurable via the following style,
+# where context is *brief*, *oneline*, and *medium*, which will be passed to the
+# `--pretty=format:` switch.
+zstyle ':prezto:module:git:log:context' format 'oneline'
 
 # GNU Utility
 #
@@ -87,7 +100,7 @@ zstyle ':prezto:module:history-substring-search' globbing-flags ''
 # macOS
 #
 # Set the keyword used by `mand` to open man pages in Dash.app
-zstyle ':prezto:module:osx:man' dash-keyword 'manpages'
+#zstyle ':prezto:module:osx:man' dash-keyword 'manpages'
 
 # Pacman
 #
@@ -114,7 +127,7 @@ zstyle ':prezto:module:prompt' theme 'josh'
 # Auto switch the Python virtualenv on directory change.
 # zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
 # Automatically initialize virtualenvwrapper if pre-requisites are met.
-zstyle ':prezto:module:python:virtualenv' initialize 'yes'
+#zstyle ':prezto:module:python:virtualenv' initialize 'yes'
 
 # Ruby
 #
@@ -150,8 +163,8 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
 #  'command' 'bg=blue' \
 #  'function' 'bg=blue'
 # Set syntax pattern styles.
-zstyle ':prezto:module:syntax-highlighting' pattern \
-  'rm*-rf*' 'fg=red,bold,bg=black'
+#zstyle ':prezto:module:syntax-highlighting' pattern \
+#  'rm*-rf*' 'fg=white,bold,bg=red'
 
 # Terminal
 #
@@ -180,4 +193,4 @@ zstyle ':prezto:module:tmux:iterm' integrate 'yes'
 # Enabled safe options. This aliases cp, ln, mv and rm so that they prompt
 # before deleting or overwriting files. Set to 'no' to disable this safer
 # behavior.
-zstyle ':prezto:module:utility' safe-ops 'yes'
+#zstyle ':prezto:module:utility' safe-ops 'yes'

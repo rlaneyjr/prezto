@@ -4,6 +4,25 @@
 # Authors:
 #   Ricky Laney <rlaneyjr@gmail.com>
 #
+# ### zshrc
+# 
+# This file is sourced by interactive shells. It should define aliases,
+# functions, shell options, and key bindings.
+########################################
+# The configuration files are read in the following order:
+# 
+#   01. /etc/zshenv
+#   02. ~/.zshenv
+#   03. /etc/zprofile
+#   04. ~/.zprofile
+#   05. /etc/zshrc
+#   06. ~/.zshrc
+#   07. ~/.zpreztorc
+#   08. /etc/zlogin
+#   09. ~/.zlogin
+#   10. ~/.zlogout
+#   11. /etc/zlogout
+########################################
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -23,6 +42,16 @@ fi
 #    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
 #        eval "$("$BASE16_SHELL/profile_helper.sh")"
 
+# Set iterm hostname prior to script to speed-up.
+ITERM2_HOSTNAME='flypro'
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# maintains a jump-list of the directories you actually use
+#. /usr/local/etc/profile.d/z.sh
+
+# OPAM configuration
+. $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
 # pandoc completion
 eval $(pandoc --bash-completion)
 
@@ -35,32 +64,44 @@ source <(kubectl completion zsh)
 # KubeCTL Completions for BASH
 #source <(kubectl completion bash)
 
-# AWS-CLI completer
+# Initialize jenv Java Manager
+eval "$(jenv init -)"
+
+# Initialize direnv the environment variables manager
+eval "$(direnv hook zsh)"
+
+# Pyenv auto-activation
+#eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
+#if which pyenv virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+## AWS-CLI completer
+#if [ -f /usr/local/bin/aws_completer ]; then
+#    source /usr/local/bin/aws_completer;
+#fi
 #if [ -f /usr/local/bin/aws_zsh_completer.sh]; then
 #    source /usr/local/bin/aws_zsh_completer.sh
 #fi
 #if [ -f /usr/local/bin/aws_completer.sh]; then
 #    source /usr/local/bin/aws_completer.sh
 #fi
-#source /usr/local/bin/aws_zsh_completer.sh
-#source /usr/local/bin/aws_completer
 
 #Add the following to your ~/.bash_profile:
 #if [ -f /usr/local/share/bash-completion/bash_completion ]; then
 #  . /usr/local/share/bash-completion/bash_completion
 #fi
 
-# Add tab completion for many Bash commands
-#if which brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
-#	source "$(brew --prefix)/share/bash-completion/bash_completion";
-#elif [ -f /etc/bash_completion ]; then
-#	source /etc/bash_completion;
-#fi;
-
-# Homebrew completion
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-fi
+### Add tab completion for many Bash commands
+##if which brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
+##	source "$(brew --prefix)/share/bash-completion/bash_completion";
+##elif [ -f /etc/bash_completion ]; then
+##	source /etc/bash_completion;
+##fi;
+##
+### Homebrew completion
+##if type brew &>/dev/null; then
+##  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+##fi
 
 # Enable tab completion for `g` by marking it as an alias for `git`
 if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
@@ -79,13 +120,6 @@ compctl -W "NSGlobalDomain" defaults;
 
 # Add `killall` tab completion for common apps
 compctl -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal iTerm2" killall;
-
-# Set iterm hostname prior to script to speed-up.
-ITERM2_HOSTNAME='flypro'
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-# maintains a jump-list of the directories you actually use
-#. /usr/local/etc/profile.d/z.sh
 
 # Setup pyenv custom prompt "zsh-python-prompt"
 source $ZSH_CUSTOM/zshrc.zsh
@@ -115,9 +149,6 @@ colors
 
 # Loading Prompts
 autoload -U promptinit; promptinit
-
-# enable colored output from ls, etc. on FreeBSD-based systems
-export CLICOLOR=1
 
 # Increase Bash history size. Allow 32³ entries; the default is 500.
 export HISTSIZE='32768';
@@ -209,7 +240,7 @@ setopt correct
 
 # ===== Prompt
 # Enable parameter expansion, command substitution, and arithmetic expansion in the prompt
-setopt prompt_subst # Make sure prompt is able to be generated properly.
+#setopt prompt_subst # Make sure prompt is able to be generated properly.
 # only show the rprompt on the current prompt
 #setopt transient_rprompt
 
@@ -267,23 +298,12 @@ fi
 # New Fuzzy Finder with my custom config
 [ -f ~/.fzf.local ] && source ~/.fzf.local
 
+# Load my private stuff
+[[ -f ~/.ssh/.private ]] && source ~/.ssh/.private
+
 # (eval):setopt:3: no such option: NO_warnnestedvar
 # fix: (eval):setopt:3: no such option: NO_warnnestedvar
 #_comp_options="${_comp_options/NO_warnnestedvar/}"
-
-# OPAM configuration
-. $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-
-# Initialize jenv Java Manager
-eval "$(jenv init -)"
-
-# Initialize direnv the environment variables manager
-eval "$(direnv hook zsh)"
-
-# Pyenv auto-activation
-#eval "$(pyenv init -)"
-#eval "$(pyenv virtualenv-init -)"
-#if which pyenv virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 ########## Profiler ###########
 #if [[ "$PROFILE_STARTUP" == true ]]; then
