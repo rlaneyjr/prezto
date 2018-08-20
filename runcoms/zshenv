@@ -29,3 +29,98 @@ if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; t
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
+########## Profiler ###########
+# Credit: https://kev.inburke.com/kevin/profiling-zsh-startup-time/
+
+#PROFILE_STARTUP=true
+#if [[ "$PROFILE_STARTUP" == true ]]; then
+#    zmodload zsh/zprof # Output load-time statistics
+#    # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+#    PS4=$'%D{%M%S%.} %N:%i> '
+#    exec 3>&2 2>"${XDG_CACHE_HOME:-$HOME/temp}/zsh_startup.$$"
+#    setopt xtrace prompt_subst
+#fi
+############################################################
+# Ensure go has it's GOROOT loaded
+typeset -Ug GOPATH
+export GOPATH="$HOME/.go"
+##export PATH="/usr/local/opt/go/libexec/bin:$PATH"
+# Go Code bin commands
+##export PATH="$HOME/.go/bin:$PATH"
+
+############################################################
+# Node Version Manager
+#Add the following to ~/.zshrc or your desired shell
+#configuration file:
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+# Enable persistent REPL history for `node`.
+export NODE_REPL_HISTORY="$HOME/.node_history"
+# Allow 32³ entries; the default is 1000.
+export NODE_REPL_HISTORY_SIZE="32768"
+# Use sloppy mode by default, matching web browsers.
+export NODE_REPL_MODE="sloppy"
+
+############################################################
+# Atom Environment Variables:
+# The path from which Atom loads source code in dev mode.
+# Defaults to `~/github/atom`.
+export ATOM_DEV_RESOURCE_PATH="$HOME/.atom/dev"
+# The root path for all configuration files and folders.
+# Defaults to `~/.atom`.
+export ATOM_HOME="$HOME/.atom"
+
+############################################################
+# User specified directories.  Can be overriden with local command.
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+############################################################
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '$HOME/Projects/Cloud/Google/google-cloud-sdk/path.zsh.inc' ];
+then source '$HOME/Projects/Cloud/Google/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '$HOME/Projects/Cloud/Google/google-cloud-sdk/completion.zsh.inc' ];
+then source '$HOME/Projects/Cloud/Google/google-cloud-sdk/completion.zsh.inc'; fi
+
+############################################################
+# Add RVM to PATH for scripting
+if [[ -f $HOME/.rvmrc ]]; then
+    source $HOME/.rvmrc;
+fi
+
+# Load RVM into a shell session *as a function*
+# RVM home scripts completion
+[[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+#if [[ -d $HOME/.rvm/bin ]]; then
+#    export PATH="$PATH:$HOME/.rvm/bin"
+#fi
+
+############################################################
+# Cheats customizations
+#CHEATERS="$HOME/cheaters/cheaters"
+export CHEAT_EDITOR="vim"
+export DEFAULT_CHEAT_DIR="$HOME/.cheat/cheat/cheatsheets"
+#export CHEATPATH="$CHEATERS/CheatenLife:$CHEATERS/CloudLife:$CHEATERS/FlyinLife
+#                 :$CHEATERS/MayccollLife:$CHEATERS/PacketLife:$CHEATERS/PerlLife
+#                 :$CHEATERS/PythonLife:$CHEATERS/VMwareLife"
+export CHEATCOLORS=true
+# Specifying a Syntax Highlighter
+# You may manually specify which syntax highlighter to use for each cheatsheet by wrapping the sheet's contents in a Github-Flavored Markdown code-fence.
+# Example:
+#
+# ```sql
+# -- to select a user by ID
+# SELECT *
+# FROM Users
+# WHERE id = 100
+# ```
+# If no syntax highlighter is specified, the bash highlighter will be used by default.
+
+############################################################
+# Ansible Environment
+#export ANSIBLE_CONFIG=$HOME/Projects/ansible.cfg
+#export ANSIBLE_LIBRARY=$HOME/Projects/ansible-cisco-snmp/library
+
