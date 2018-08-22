@@ -246,12 +246,6 @@ setopt autocd autopushd pushdminus pushdsilent pushdtohome cdablevars
 #setopt auto_name_dirs
 # This allows us to omit the $ when cding into the directory variable
 #setopt cdable_varS
-# why would you type 'cd dir' if you could just type 'dir'?
-setopt AUTO_CD
-# This makes cd=pushd
-setopt AUTO_PUSHD
-# This will use named dirs when possible
-setopt AUTO_NAME_DIRS
 
 # ===== Basics
 # don't beep on error
@@ -266,16 +260,6 @@ setopt auto_cd
 setopt cdablevarS
 # don't push multiple copies of the same directory onto the directory stack
 setopt pushd_ignore_dups
-
-# If we have a glob this will expand it
-setopt GLOB_COMPLETE
-setopt PUSHD_MINUS
-# No more annoying pushd messages...
-# setopt PUSHD_SILENT
-# blank pushd goes to home
-setopt PUSHD_TO_HOME
-# this will ignore multiple directories for the stack.  Useful?  I dunno.
-setopt PUSHD_IGNORE_DUPS
 
 # ===== Expansion and Globbing
 # treat #, ~, and ^ as part of patterns for filename generation
@@ -334,31 +318,48 @@ setopt correct
 # ===== Scripts and Functions
 # perform implicit tees or cats when multiple redirections are attempted
 setopt multios
-# Now we can pipe to multiple outputs!
-setopt MULTIOS
 
-# 10 second wait if you do something that will delete everything.  I wish I'd had this before...
-setopt RM_STAR_WAIT
-# use magic (this is default, but it can't hurt!)
-setopt ZLE
-setopt NO_HUP
-setopt IGNORE_EOF
-# If I could disable Ctrl-s completely I would!
-setopt NO_FLOW_CONTROL
-# Keep echo "station" > station from clobbering station
-setopt NO_CLOBBER
-# Case insensitive globbing
-setopt NO_CASE_GLOB
-# Be Reasonable!
-setopt NUMERIC_GLOB_SORT
-# I don't know why I never set this before.
-setopt EXTENDED_GLOB
-# hows about arrays be awesome?  (that is, frew${cool}frew has frew surrounding all the variables, not just first and last
-setopt RC_EXPAND_PARAM
+## why would you type 'cd dir' if you could just type 'dir'?
+#setopt AUTO_CD
+## This makes cd=pushd
+#setopt AUTO_PUSHD
+## This will use named dirs when possible
+#setopt AUTO_NAME_DIRS
+## If we have a glob this will expand it
+#setopt GLOB_COMPLETE
+#setopt PUSHD_MINUS
+## No more annoying pushd messages...
+## setopt PUSHD_SILENT
+## blank pushd goes to home
+#setopt PUSHD_TO_HOME
+## this will ignore multiple directories for the stack.  Useful?  I dunno.
+#setopt PUSHD_IGNORE_DUPS
+#
+## 10 second wait if you do something that will delete everything.  I wish I'd had this before...
+#setopt RM_STAR_WAIT
+## use magic (this is default, but it can't hurt!)
+#setopt ZLE
+#setopt NO_HUP
+#setopt IGNORE_EOF
+## If I could disable Ctrl-s completely I would!
+#setopt NO_FLOW_CONTROL
+## Keep echo "station" > station from clobbering station
+#setopt NO_CLOBBER
+## Case insensitive globbing
+#setopt NO_CASE_GLOB
+## Be Reasonable!
+#setopt NUMERIC_GLOB_SORT
+## I don't know why I never set this before.
+#setopt EXTENDED_GLOB
+## hows about arrays be awesome?  (that is, frew${cool}frew has frew surrounding all the variables, not just first and last
+#setopt RC_EXPAND_PARAM
+## Now we can pipe to multiple outputs!
+#setopt MULTIOS
 
 # vi mode
 bindkey -v
 bindkey "^F" vi-cmd-mode
+bindkey -M vicmd v edit-command-line
 
 # handy keybindings
 bindkey "^A" beginning-of-line
@@ -396,6 +397,11 @@ bindkey -M vicmd "??" history-beginning-search-forward
 bindkey "\eOP" run-help
 # oh wow!  This is killer...  try it!
 bindkey -M vicmd "q" push-line
+
+# Fun tetris!
+autoload -U tetris
+zle -N tetris
+bindkey "^Q" tetris
 
 # load custom executable functions
 if [ -f ~/.myshutils ]; then
