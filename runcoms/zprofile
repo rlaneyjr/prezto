@@ -93,6 +93,7 @@ path=(
     /usr/local/opt/icu4c/sbin
     /usr/local/opt/tcl-tk/bin
     /usr/local/opt/sqlite/bin
+    /usr/local/opt/libpq/bin
     /usr/local/opt/libxml2/bin
     /usr/local/opt/go/libexec/bin
     $HOME/.go/bin
