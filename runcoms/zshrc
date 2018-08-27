@@ -149,6 +149,11 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # maintains a jump-list of the directories you actually use
 #. /usr/local/etc/profile.d/z.sh
 
+# heroku autocomplete setup
+HEROKU_AC_ZSH_SETUP_PATH=/Users/rlaney/Library/Caches/heroku/autocomplete/zsh_setup && \
+    test -f $HEROKU_AC_ZSH_SETUP_PATH && \
+    source $HEROKU_AC_ZSH_SETUP_PATH;
+
 # OPAM configuration
 . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 

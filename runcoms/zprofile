@@ -101,6 +101,7 @@ path=(
     /usr/local/opt/qt/bin
     /usr/local/opt/ncurses/bin
     /usr/local/opt/openssl/bin
+    /usr/local/opt/sphinx-doc/bin
     /opt/X11/bin
     /Applications/VMware Fusion.app/Contents/Library
     $path
@@ -109,7 +110,6 @@ path=(
 # load our own completions (~/.zsh/completion)
 fpath=(
     $HOME/.zsh/completion
-    /usr/local/bin
     /usr/local/share/cmake/completions
     /usr/local/share/bash-completion
     /usr/local/share/bash-completion/bash-completion
