@@ -110,16 +110,22 @@ path=(
 # load our own completions (~/.zsh/completion)
 fpath=(
     $HOME/.zsh/completion
-    /usr/local/share/cmake/completions
-    /usr/local/share/bash-completion
-    /usr/local/share/bash-completion/bash-completion
-    /usr/local/share/bash-completion/completions
-    /usr/local/share/the_silver_searcher/completions
     /usr/local/share/zsh/functions
     /usr/local/share/zsh/site-functions
     /usr/local/share/zsh-completions
     $fpath
 )
+
+    # Removed fpath:
+#    /usr/local/etc/bash_completion.d
+#    /usr/local/etc/profile.d/bash_completion.sh
+#    /usr/local/Homebrew/completions/zsh
+#    /usr/share/zsh/5.3/functions
+#    /usr/share/zsh/site-functions
+#    /usr/local/share/cmake/completions
+#    /usr/local/share/bash-completion
+#    /usr/local/share/bash-completion/bash-completion
+#    /usr/local/share/bash-completion/completions
 
 # enable colored output from ls, etc. on FreeBSD-based systems
 export CLICOLOR=1
