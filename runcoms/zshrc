@@ -77,7 +77,7 @@ pyenv virtualenvwrapper_lazy
 #PYENV_VIRTUALENV_INIT
 
 # PIPENV Settings
-#eval "$(pipenv --completion)"
+eval "$(pipenv --completion)"
 export PIPENV_PYTHON=$PYENV_ROOT/shims/python
 export PIPENV_SHELL="$(which zsh)"
 #export PIPENV_NO_INHERIT
@@ -430,53 +430,18 @@ fi
 #done
 
 # Adding extra completions manually
-#EXT_COMP="ag.bashcomp.sh apm aptly aws_bash_completer az bash boom boot2docker-completion.bash brew bundler cargo django fabric fd.bash gem git-prompt.sh grunt hub.bash_completion.sh kitchen lsar.bash_completion maven mix npm nvm opam_completion.sh open packer pandoc pip rails rake ruby rustc scala sonar spring t tmux tmuxinator unar.bash_completion vagrant wp"
-#for f in $EXT_COMP; do
-#    source /usr/local/etc/bash_completion.d/$f
-#done
-
-source /usr/local/etc/bash_completion.d/ag.bashcomp.sh
 source /usr/local/etc/bash_completion.d/apm
-source /usr/local/etc/bash_completion.d/aptly
-source /usr/local/etc/bash_completion.d/aws_bash_completer
 source /usr/local/etc/bash_completion.d/az
-source /usr/local/etc/bash_completion.d/bash
-source /usr/local/etc/bash_completion.d/boom
-source /usr/local/etc/bash_completion.d/boot2docker-completion.bash
-source /usr/local/etc/bash_completion.d/brew
-source /usr/local/etc/bash_completion.d/bundler
-source /usr/local/etc/bash_completion.d/cargo
-source /usr/local/etc/bash_completion.d/django
-source /usr/local/etc/bash_completion.d/fabric
 source /usr/local/etc/bash_completion.d/fd.bash
-source /usr/local/etc/bash_completion.d/gem
 source /usr/local/etc/bash_completion.d/git-prompt.sh
 source /usr/local/etc/bash_completion.d/grunt
-source /usr/local/etc/bash_completion.d/hub.bash_completion.sh
-source /usr/local/etc/bash_completion.d/kitchen
-source /usr/local/etc/bash_completion.d/lsar.bash_completion
-source /usr/local/etc/bash_completion.d/maven
-source /usr/local/etc/bash_completion.d/mix
 source /usr/local/etc/bash_completion.d/npm
-source /usr/local/etc/bash_completion.d/nvm
 source /usr/local/etc/bash_completion.d/opam_completion.sh
-source /usr/local/etc/bash_completion.d/open
-source /usr/local/etc/bash_completion.d/packer
 source /usr/local/etc/bash_completion.d/pandoc
-source /usr/local/etc/bash_completion.d/pip
 source /usr/local/etc/bash_completion.d/rails
 source /usr/local/etc/bash_completion.d/rake
 source /usr/local/etc/bash_completion.d/ruby
-source /usr/local/etc/bash_completion.d/rustc
 source /usr/local/etc/bash_completion.d/scala
-source /usr/local/etc/bash_completion.d/sonar
-source /usr/local/etc/bash_completion.d/spring
-source /usr/local/etc/bash_completion.d/t
-source /usr/local/etc/bash_completion.d/tmux
-source /usr/local/etc/bash_completion.d/tmuxinator
-source /usr/local/etc/bash_completion.d/unar.bash_completion
-source /usr/local/etc/bash_completion.d/vagrant
-source /usr/local/etc/bash_completion.d/wp
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
