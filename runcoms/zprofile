@@ -104,6 +104,8 @@ path=(
     /usr/local/opt/sphinx-doc/bin
     /opt/X11/bin
     /Applications/VMware Fusion.app/Contents/Library
+    /Applications/Wireshark.app/Contents/MacOS/extcap
+    /Applications/Wireshark.app/Contents/MacOS
     $path
 )
 
