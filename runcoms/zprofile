@@ -83,25 +83,6 @@ path=(
     /usr/local/{bin,sbin}
     /Applications
     /Users/rlaney/{bin,lib,scripts}
-    $HOME/bin
-    $HOME/lib
-    $HOME/scripts
-    $HOME/.jenv/bin
-    $HOME/.rvm/bin
-    $HOME/.zsh/functions
-    /usr/local/opt/icu4c/bin
-    /usr/local/opt/icu4c/sbin
-    /usr/local/opt/tcl-tk/bin
-    /usr/local/opt/sqlite/bin
-    /usr/local/opt/libpq/bin
-    /usr/local/opt/libxml2/bin
-    /usr/local/opt/go/libexec/bin
-    $HOME/.go/bin
-    /usr/local/opt/bison/bin
-    /usr/local/opt/qt/bin
-    /usr/local/opt/ncurses/bin
-    /usr/local/opt/openssl/bin
-    /usr/local/opt/sphinx-doc/bin
     /opt/X11/bin
     /Applications/VMware Fusion.app/Contents/Library
     /Applications/Wireshark.app/Contents/MacOS/extcap
@@ -117,6 +98,24 @@ fpath=(
     /usr/local/share/zsh-completions
     $fpath
 )
+
+    # Removed path:
+#    $HOME/.go/bin
+#    $HOME/.jenv/bin
+#    $HOME/.rvm/bin
+#    $HOME/.zsh/functions
+#    /usr/local/opt/icu4c/bin
+#    /usr/local/opt/icu4c/sbin
+#    /usr/local/opt/openssl/bin
+#    /usr/local/opt/tcl-tk/bin
+#    /usr/local/opt/sqlite/bin
+#    /usr/local/opt/libpq/bin
+#    /usr/local/opt/libxml2/bin
+#    /usr/local/opt/go/libexec/bin
+#    /usr/local/opt/bison/bin
+#    /usr/local/opt/qt/bin
+#    /usr/local/opt/ncurses/bin
+#    /usr/local/opt/sphinx-doc/bin
 
     # Removed fpath:
 #    /usr/local/etc/bash_completion.d
