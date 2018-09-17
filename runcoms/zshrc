@@ -178,6 +178,9 @@ source <(kubectl completion zsh)
 # KubeCTL Completions for BASH
 #source <(kubectl completion bash)
 
+# In zsh*, the following will load openshift cli zsh completion:
+source <(oc completion zsh)
+
 # Initialize jenv Java Manager
 eval "$(jenv init -)"
 
