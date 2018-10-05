@@ -41,6 +41,22 @@ if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; t
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
+
+# ranger --copy-config=all
+# Warning: Unable to set locale.  Expect encoding problems.
+# creating: /omd/sites/hts/.config/ranger/rifle.conf
+# creating: /omd/sites/hts/.config/ranger/commands.py
+# creating: /omd/sites/hts/.config/ranger/commands_full.py
+# creating: /omd/sites/hts/.config/ranger/rc.conf
+# creating: /omd/sites/hts/.config/ranger/scope.sh
+# 
+# > Please note that configuration files may change as ranger evolves.
+#   It's completely up to you to keep them up to date.
+# 
+# > To stop ranger from loading both the default and your custom rc.conf,
+#   please set the environment variable RANGER_LOAD_DEFAULT_RC to FALSE.
+export RANGER_LOAD_DEFAULT_RC=FALSE
+
 ############################################################
 # Ensure go has it's GOROOT loaded
 typeset -Ug GOPATH
