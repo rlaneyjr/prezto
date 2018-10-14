@@ -61,9 +61,11 @@ zstyle ':prezto:load' pmodule \
   'contrib-clipboard' \
   'contrib-kubernetes' \
   'contrib-prompt' \
+  'zsh-better-npm-completion' \
   'prompt'
 
 # Removed
+#  'zsh-nvm' \
 #  'homebrew' \
 # Autosuggestions
 #

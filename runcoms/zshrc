@@ -5,12 +5,12 @@
 #   Ricky Laney <rlaneyjr@gmail.com>
 #
 # ### zshrc
-# 
+#
 # This file is sourced by interactive shells. It should define aliases,
 # functions, shell options, and key bindings.
 ########################################
 # The configuration files are read in the following order:
-# 
+#
 #   01. /etc/zshenv
 #   02. ~/.zshenv
 #   03. /etc/zprofile
@@ -175,6 +175,7 @@ compctl -K _pip_completion pip3
 
 # KubeCTL Completions for ZSH
 source <(kubectl completion zsh)
+source <(helm completion zsh)
 # KubeCTL Completions for BASH
 #source <(kubectl completion bash)
 
@@ -441,19 +442,17 @@ fi
 #  source $function
 #done
 
+# NOT WORKING!!
+#/usr/local/etc/bash_completion.d/doctl:type:4555: bad option: -t
+#WARNING: this script is deprecated, please see git-completion.zsh
+#/usr/local/etc/bash_completion.d/helm:type:1671: bad option: -t
+#/usr/local/etc/bash_completion.d/kubectl:type:7716: bad option: -t
+#/usr/local/etc/bash_completion.d/oc:type:18213: bad option: -t
+#/usr/local/etc/bash_completion.d/openshift:type:785: bad option: -t
 # Adding extra completions manually
-source /usr/local/etc/bash_completion.d/apm
-source /usr/local/etc/bash_completion.d/az
-source /usr/local/etc/bash_completion.d/fd.bash
-source /usr/local/etc/bash_completion.d/git-prompt.sh
-source /usr/local/etc/bash_completion.d/grunt
-source /usr/local/etc/bash_completion.d/npm
-source /usr/local/etc/bash_completion.d/opam_completion.sh
-source /usr/local/etc/bash_completion.d/pandoc
-source /usr/local/etc/bash_completion.d/rails
-source /usr/local/etc/bash_completion.d/rake
-source /usr/local/etc/bash_completion.d/ruby
-source /usr/local/etc/bash_completion.d/scala
+#for f in $(ls -1 /usr/local/etc/bash_completion.d); do
+#    source /usr/local/etc/bash_completion.d/$f;
+#done
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
@@ -487,19 +486,6 @@ zstyle ':vimman:' expire 7
 # Note that if you change the zstyle settings, you should delete the cache file and restart zsh.
 # $ rm ~/.zcompcache/vimman
 # $ exec zsh
-
-############################################################
-# Node Version Manager
-#Add the following to ~/.zshrc or your desired shell
-#configuration file:
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
-# Enable persistent REPL history for `node`.
-export NODE_REPL_HISTORY="$HOME/.node_history"
-# Allow 32³ entries; the default is 1000.
-export NODE_REPL_HISTORY_SIZE="32768"
-# Use sloppy mode by default, matching web browsers.
-export NODE_REPL_MODE="sloppy"
 
 ############################################################
 #source /usr/local/etc/bash_completion.d/*

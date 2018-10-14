@@ -104,6 +104,7 @@ fpath=(
 #    $HOME/.jenv/bin
 #    $HOME/.rvm/bin
 #    $HOME/.zsh/functions
+#    /usr/local/opt/node@8/bin
 #    /usr/local/opt/icu4c/bin
 #    /usr/local/opt/icu4c/sbin
 #    /usr/local/opt/openssl/bin
