@@ -138,3 +138,7 @@ export CHEATCOLORS=true
 #export ANSIBLE_CONFIG=$HOME/Projects/ansible.cfg
 #export ANSIBLE_LIBRARY=$HOME/Projects/ansible-cisco-snmp/library
 
+############################################################
+# Tastedive.com API Access Key
+export TASTE_API_KEY="322428-NetEngOn-CPK7XUTD"
+
