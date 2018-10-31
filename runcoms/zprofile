@@ -41,7 +41,8 @@
 ########################################
 # Stuff that needs to be loaded first due to dependencies.
 export ZSH_CUSTOM=$HOME/.zsh
-export TERM='xterm-256color'
+#export TERM='xterm-256color'
+export TERM='xterm-256color-italic'
 #export TERM='screen-256color'
 
 # Browser
