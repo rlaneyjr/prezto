@@ -78,10 +78,11 @@ pyenv virtualenvwrapper_lazy
 
 # PIPENV Settings
 eval "$(pipenv --completion)"
-export PIPENV_PYTHON=$PYENV_ROOT/shims/python
+#export PIPENV_PYTHON=$PYENV_ROOT/shims/python
 export PIPENV_SHELL="$(which zsh)"
+export PIPENV_VERBOSITY=-1
 #export PIPENV_NO_INHERIT
-export PIPENV_VIRTUALENV="$WORKON_HOME"
+export PIPENV_VIRTUALENV=$HOME/.virtualenvs
 #export PIPENV_MAX_SUBPROCESS
 #export PIPENV_MAX_RETRIES
 #export PIPENV_USE_SYSTEM
