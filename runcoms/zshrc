@@ -82,7 +82,8 @@ eval "$(pipenv --completion)"
 export PIPENV_SHELL="$(which zsh)"
 export PIPENV_VERBOSITY=-1
 #export PIPENV_NO_INHERIT
-export PIPENV_VIRTUALENV=$HOME/.virtualenvs
+export PIPENV_VENV_IN_PROJECT=True
+#export PIPENV_VIRTUALENV=$HOME/.virtualenvs
 #export PIPENV_MAX_SUBPROCESS
 #export PIPENV_MAX_RETRIES
 #export PIPENV_USE_SYSTEM
