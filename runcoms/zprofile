@@ -75,7 +75,11 @@ typeset -gU cdpath fpath mailpath path manpath
 # Set the list of directories that cd searches.
 cdpath=(
     /Users/rlaney
-    /Users/rlaney/{repos,Projects}
+    /Users/rlaney/{bin,lib,scripts,temp,tmp}
+    /Users/rlaney/{cheaters,repos,DB}
+    /Users/rlaney/{Projects,Workshops,Documents,PycharmProjects}
+    /Users/rlaney/"Creative Cloud Files"
+    /Users/rlaney/"Dropbox (Personal)"
     $cdpath
 )
 
