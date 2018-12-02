@@ -73,9 +73,9 @@ export GOPATH="$HOME/.go"
 # Node Version Manager
 #Add the following to ~/.zshrc or your desired shell
 #configuration file:
-#export NVM_AUTO_USE_ACTIVE=true
-#export NVM_DIR="$HOME/.nvm"
-#. "/usr/local/opt/nvm/nvm.sh"
+export NVM_AUTO_USE_ACTIVE=true
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
 
 ############################################################
 # node@8 is keg-only, which means it was not symlinked into /usr/local,
