@@ -65,6 +65,7 @@ export RANGER_LOAD_DEFAULT_RC=FALSE
 # Ensure go has it's GOROOT loaded
 typeset -Ug GOPATH
 export GOPATH="$HOME/.go"
+#export GOBIN="$HOME/.go/bin"
 ##export PATH="/usr/local/opt/go/libexec/bin:$PATH"
 # Go Code bin commands
 ##export PATH="$HOME/.go/bin:$PATH"

@@ -88,6 +88,7 @@ path=(
     /usr/local/opt/coreutils/libexec/gnubin
     /usr/local/{bin,sbin}
     /Applications
+    $HOME/.go/bin
     /Users/rlaney/{bin,lib,scripts}
     /opt/X11/bin
     /Applications/VMware Fusion.app/Contents/Library
