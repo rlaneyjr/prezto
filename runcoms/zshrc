@@ -184,6 +184,9 @@ source <(helm completion zsh)
 # In zsh*, the following will load openshift cli zsh completion:
 source <(oc completion zsh)
 
+# Init npx completion
+source <(npx --shell-auto-fallback zsh)
+
 # Initialize jenv Java Manager
 eval "$(jenv init -)"
 
