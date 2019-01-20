@@ -166,7 +166,9 @@ HEROKU_AC_ZSH_SETUP_PATH=/Users/rlaney/Library/Caches/heroku/autocomplete/zsh_se
     source $HEROKU_AC_ZSH_SETUP_PATH;
 
 # OPAM configuration
-. $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+# Otherwise, every time you want to access your opam installation, you will need to run: eval $(opam env)
+#. $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+test -r $HOME/.opam/opam-init/init.zsh && . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 # pandoc completion
 eval $(pandoc --bash-completion)
