@@ -147,3 +147,8 @@ export CHEATCOLORS=true
 # Tastedive.com API Access Key
 export TASTE_API_KEY="322428-NetEngOn-CPK7XUTD"
 
+############################################################
+# Pinboard.com API Access Key
+export PINBOARD_TOKEN="rlaney:765D69E427A843DCC53F"
+export PINBOARD_API_KEY="rlaney:765D69E427A843DCC53F"
+
