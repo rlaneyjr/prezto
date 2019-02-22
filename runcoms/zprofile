@@ -89,6 +89,7 @@ path=(
     /usr/local/{bin,sbin}
     /Applications
     $HOME/.go/bin
+    $HOME/.jenv/bin
     /Users/rlaney/{bin,lib,scripts}
     /opt/X11/bin
     /Applications/VMware Fusion.app/Contents/Library
