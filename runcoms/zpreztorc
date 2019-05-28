@@ -91,7 +91,7 @@ zstyle ':prezto:module:editor' ps-context 'yes'
 # Git
 #
 # Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
-zstyle ':prezto:module:git:status:ignore' submodules 'all'
+zstyle ':prezto:module:git:status:ignore' submodules 'none'
 #zstyle ':prezto:module:git:alias' skip 'yes'
 # The format of the [git-log][8] output is configurable via the following style,
 # where context is *brief*, *oneline*, and *medium*, which will be passed to the
