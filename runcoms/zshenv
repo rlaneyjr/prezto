@@ -152,3 +152,10 @@ export TASTE_API_KEY="322428-NetEngOn-CPK7XUTD"
 export PINBOARD_TOKEN="rlaney:765D69E427A843DCC53F"
 export PINBOARD_API_KEY="rlaney:765D69E427A843DCC53F"
 
+# # For compilers to find zlib you may need to set:
+# export LDFLAGS="-L/usr/local/opt/zlib/lib"
+# export CPPFLAGS="-I/usr/local/opt/zlib/include"
+#
+# # For pkg-config to find zlib you may need to set:
+# export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
+

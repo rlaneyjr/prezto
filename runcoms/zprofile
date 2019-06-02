@@ -85,6 +85,18 @@ cdpath=(
 
 # Set the list of directories that Zsh searches for programs.
 path=(
+    /usr/local/opt/icu4c/bin
+    /usr/local/opt/icu4c/sbin
+    /usr/local/opt/openssl/bin
+    /usr/local/opt/tcl-tk/bin
+    /usr/local/opt/sqlite/bin
+    /usr/local/opt/libpq/bin
+    /usr/local/opt/libxml2/bin
+    /usr/local/opt/go/libexec/bin
+    /usr/local/opt/bison/bin
+    /usr/local/opt/qt/bin
+    /usr/local/opt/ncurses/bin
+    /usr/local/opt/sphinx-doc/bin
     /usr/local/opt/coreutils/libexec/gnubin
     /usr/local/{bin,sbin}
     /Applications

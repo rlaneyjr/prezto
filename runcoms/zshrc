@@ -50,7 +50,7 @@ export PYTHONIOENCODING='UTF-8';
 typeset -Ug PYTHONPATH
 export PYTHONPATH="$HOME/lib:$PYTHONPATH"
 # Needed before installing Python versions with pyenv for YouCompleteMe
-export PYTHON_CONFIGURE_OPTS="--enable-framework"
+#export PYTHON_CONFIGURE_OPTS="--enable-framework"
 
 # Virtual Environment
 export WORKON_HOME=$HOME/.virtualenvs
