@@ -92,6 +92,8 @@ path=(
     $HOME/.jenv/bin
     /Users/rlaney/{bin,lib,scripts}
     /opt/X11/bin
+    /opt/cisco/anyconnect/bin
+    /opt/vagrant/bin
     /Applications/VMware Fusion.app/Contents/Library
     /Applications/Wireshark.app/Contents/MacOS/extcap
     /Applications/Wireshark.app/Contents/MacOS
