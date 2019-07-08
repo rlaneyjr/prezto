@@ -26,14 +26,14 @@
 ########## Profiler ###########
 # Credit: https://kev.inburke.com/kevin/profiling-zsh-startup-time/
 
-#PROFILE_STARTUP=true
-#if [[ "$PROFILE_STARTUP" == true ]]; then
-#    zmodload zsh/zprof # Output load-time statistics
-#    # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
-#    PS4=$'%D{%M%S%.} %N:%i> '
-#    exec 3>&2 2>"${XDG_CACHE_HOME:-$HOME/temp}/zsh_startup.$$"
-#    setopt xtrace prompt_subst
-#fi
+PROFILE_STARTUP=true
+if [[ "$PROFILE_STARTUP" == true ]]; then
+    zmodload zsh/zprof # Output load-time statistics
+    # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+    PS4=$'%D{%M%S%.} %N:%i> '
+    exec 3>&2 2>"${XDG_CACHE_HOME:-$HOME/temp}/zsh_startup.$$"
+    setopt xtrace prompt_subst
+fi
 ############################################################
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
@@ -74,9 +74,11 @@ export GOPATH="$HOME/.go"
 # Node Version Manager
 #Add the following to ~/.zshrc or your desired shell
 #configuration file:
-export NVM_AUTO_USE_ACTIVE=true
+#export NVM_AUTO_USE_ACTIVE=true
 export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+
 
 ############################################################
 # node@8 is keg-only, which means it was not symlinked into /usr/local,
