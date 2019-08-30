@@ -39,9 +39,9 @@ zmodload zsh/complist
 zstyle ':prezto:load' zmodule 'complist'
 # Set the Zsh functions to load (man zshcontrib).
 #zstyle ':prezto:load' zfunction 'zargs' 'zmv' 'cdr'
-zstyle ':prezto:load' zfunction 'cdr'
-zstyle ':completion:*:*:cdr:*:*' menu selection
-zstyle ':chpwd:*' recent-dirs-max 0
+#zstyle ':prezto:load' zfunction 'cdr'
+#zstyle ':completion:*:*:cdr:*:*' menu selection
+#zstyle ':chpwd:*' recent-dirs-max 0
 # Set the Prezto modules to load (browse modules).
 # The order matters.
 zstyle ':prezto:load' pmodule \
@@ -54,6 +54,7 @@ zstyle ':prezto:load' pmodule \
   'git' \
   'rsync' \
   'archive' \
+  'python' \
   'syntax-highlighting' \
   'history-substring-search' \
   'command-not-found' \

@@ -83,12 +83,12 @@ pyenv virtualenvwrapper_lazy
 #PYENV_VIRTUALENV_INIT
 
 # PIPENV Settings
-eval "$(pipenv --completion)"
+# eval "$(pipenv --completion)"
 #export PIPENV_PYTHON=$PYENV_ROOT/shims/python
-export PIPENV_SHELL="$(which zsh)"
-export PIPENV_VERBOSITY=-1
+# export PIPENV_SHELL="$(which zsh)"
+# export PIPENV_VERBOSITY=-1
 #export PIPENV_NO_INHERIT
-export PIPENV_VENV_IN_PROJECT=True
+# export PIPENV_VENV_IN_PROJECT=True
 #export PIPENV_VIRTUALENV=$HOME/.virtualenvs
 #export PIPENV_MAX_SUBPROCESS
 #export PIPENV_MAX_RETRIES
@@ -102,7 +102,7 @@ export PIPENV_VENV_IN_PROJECT=True
 # Use this version of Python when creating new virtual environments, by default (e.g. 3.6).
 #export PIPENV_DEFAULT_PYTHON_VERSION
 # Always use fancy mode when invoking pipenv shell.
-export PIPENV_SHELL_FANCY=1
+# export PIPENV_SHELL_FANCY=1
 # If set, use .venv in your project directory instead of the global virtualenv manager pew.
 #export PIPENV_VENV_IN_PROJECT
 # Disable terminal colors, for some reason.
@@ -207,9 +207,9 @@ eval "$(direnv hook zsh)"
 #if which pyenv virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 # AWS-CLI completer
-if [ -f /usr/local/bin/aws_completer ]; then
-    source /usr/local/bin/aws_completer;
-fi
+# if [ -f /usr/local/bin/aws_completer ]; then
+#     source /usr/local/bin/aws_completer;
+# fi
 # if [ -f /usr/local/bin/aws_zsh_completer.sh]; then
 #     source /usr/local/bin/aws_zsh_completer.sh
 # fi
@@ -477,6 +477,11 @@ fi
 
 # Load my private stuff
 [[ -f ~/.ssh/.private ]] && source ~/.ssh/.private
+
+# Create wd command
+wd() {
+    . ~/.zsh/plugins/wd/wd.sh
+}
 
 # (eval):setopt:3: no such option: NO_warnnestedvar
 # fix: (eval):setopt:3: no such option: NO_warnnestedvar

@@ -85,6 +85,7 @@ cdpath=(
 
 # Set the list of directories that Zsh searches for programs.
 path=(
+    $HOME/.poetry/bin
     /usr/local/opt/coreutils/libexec/gnubin
     /usr/local/{bin,sbin}
     /Applications
@@ -151,8 +152,8 @@ export CLICOLOR=1
 export LESS='-g -i -M -R -S -w -z-4'
 
 # Get color support for 'less'
-export LESS="--RAW-CONTROL-CHARS"
-export LESS='--ignore-case --raw-control-chars'
+# export LESS="--RAW-CONTROL-CHARS"
+# export LESS='--ignore-case --raw-control-chars'
 # Load LESS_TERMCAP color variables for less, man, etc., colorful
 [[ -f ~/.LESS_TERMCAP ]] && source ~/.LESS_TERMCAP
 
