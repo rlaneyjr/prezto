@@ -388,7 +388,7 @@ for keymap in 'emacs' 'viins'; do
   bindkey -M "$keymap" ' ' magic-space
 
   # Clear screen.
-  bindkey -M "$keymap" "$key_info[Control]L" clear-screen
+  bindkey -M "$keymap" "$key_info[Control]D" clear-screen
 
   # Expand command name to full path.
   for key in "$key_info[Escape]"{E,e}
