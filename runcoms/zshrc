@@ -181,7 +181,7 @@ source <(helm completion zsh)
 # source <(oc completion zsh)
 
 # Init npx completion
-source <(npx --shell-auto-fallback zsh)
+#source <(npx --shell-auto-fallback zsh)
 
 # Initialize jenv Java Manager
 eval "$(jenv init -)"
