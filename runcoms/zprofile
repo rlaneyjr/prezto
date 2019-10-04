@@ -73,43 +73,71 @@ fi
 typeset -gU cdpath fpath mailpath path manpath
 
 # Set the list of directories that cd searches.
-cdpath=(
-    /Users/rlaney
-    /Users/rlaney/{bin,lib,scripts,temp,tmp}
-    /Users/rlaney/{cheaters,repos,DB}
-    /Users/rlaney/{Projects,Workshops,Documents,PycharmProjects}
-    /Users/rlaney/"Creative Cloud Files"
-    /Users/rlaney/"Dropbox (Personal)"
-    $cdpath
-)
+if [ "${OSTYPE}" -eq "Darwin*" ]
+then
+    cdpath=(
+        /Users/rlaney
+        /Users/rlaney/{bin,lib,scripts,temp,tmp}
+        /Users/rlaney/{cheaters,repos,DB}
+        /Users/rlaney/{Projects,Workshops,Documents,PycharmProjects}
+        /Users/rlaney/"Creative Cloud Files"
+        /Users/rlaney/"Dropbox (Personal)"
+        $cdpath
+    )
+    
+    # Set the list of directories that Zsh searches for programs.
+    path=(
+        $HOME/.poetry/bin
+        /usr/local/opt/coreutils/libexec/gnubin
+        /usr/local/{bin,sbin}
+        /Applications
+        $HOME/.go/bin
+        $HOME/.jenv/bin
+        /Users/rlaney/{bin,lib,scripts}
+        /opt/X11/bin
+        /opt/cisco/anyconnect/bin
+        /opt/vagrant/bin
+        $path
+    )
+    
+    # load our own completions (~/.zsh/completion)
+    fpath=(
+        $HOME/.zsh/completion
+        /usr/local/share/zsh/functions
+        /usr/local/share/zsh/site-functions
+        /usr/local/share/zsh-completions
+        $fpath
+    )
 
-# Set the list of directories that Zsh searches for programs.
-path=(
-    $HOME/.poetry/bin
-    /usr/local/opt/coreutils/libexec/gnubin
-    /usr/local/{bin,sbin}
-    /Applications
-    $HOME/.go/bin
-    $HOME/.jenv/bin
-    /Users/rlaney/{bin,lib,scripts}
-    /opt/X11/bin
-    /opt/cisco/anyconnect/bin
-    /opt/vagrant/bin
-    /Applications/VMware Fusion.app/Contents/Library
-    /Applications/Wireshark.app/Contents/MacOS/extcap
-    /Applications/Wireshark.app/Contents/MacOS
-    $path
-)
-
-# load our own completions (~/.zsh/completion)
-fpath=(
-    $HOME/.zsh/completion
-    /usr/local/share/zsh/functions
-    /usr/local/share/zsh/site-functions
-    /usr/local/share/zsh-completions
-    $fpath
-)
-
+else
+    cdpath=(
+            /home/rlaney
+            /home/rlaney/{bin,lib,scripts,temp,tmp}
+            /home/rlaney/{Projects,Workshops,Documents}
+            $cdpath
+           )
+    
+    # Set the list of directories that Zsh searches for programs.
+    path=(
+            /bin
+            /usr/bin
+            /snap/bin
+            /usr/local/{bin,sbin}
+            /usr/share/virtualenvwrapper
+            /usr/share/zsh/{function,help,vendor-completion}
+            /home/rlaney/.local/bin
+            /home/rlaney/{bin,lib,scripts}
+            $path
+         )
+    
+    # load our own completions (~/.zsh/completion)
+    fpath=(
+            /home/rlaney/.zsh/completion
+            /usr/share/zsh/{function,help,vendor-completion}
+            $fpath
+    )
+fi
+    
     # Removed path:
 #    $HOME/.go/bin
 #    $HOME/.jenv/bin
