@@ -37,17 +37,16 @@
 # #   10. ~/.zlogout
 # #   11. /etc/zlogout
 # ########################################
-
 # We get the OS type to use throughout
 if [[ "$OSTYPE" == darwin* ]]; then
-  local OS="mac"
-  local HD="/Users/rlaney"
+  export OS="mac"
+  export HD="/Users/$USER"
 elif [[ "$OSTYPE" == linux* ]]; then
-  local OS="lin"
-  local HD="/home/rlaney"
+  export OS="lin"
+  export HD="/home/$USER"
 else
-  local OS="no"
-  local HD=$HOME
+  export OS="no"
+  export HD=$HOME
 fi
 ########################################
 #            Load First                #
