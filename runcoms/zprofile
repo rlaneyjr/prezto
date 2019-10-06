@@ -38,21 +38,23 @@
 #   11. /etc/zlogout
 ########################################
 # We get the OS type to use throughout
-local OS=""
 if [[ "$OSTYPE" == darwin* ]]; then
   local OS="mac"
-else
+elif [[ "$OSTYPE" == linux* ]]; then
   local OS="lin"
+else
+  local OS="no"
 fi
 ########################################
 #            Load First                #
 ########################################
 # Stuff that needs to be loaded first due to dependencies.
-export ZSH_CUSTOM=$HOME/.zsh
-
-# Browser
 if [[ $OS == "mac" ]]; then 
+  export ZSH_CUSTOM=/Users/rlaney/.zsh
   export BROWSER='open'
+  export TERM='xterm-256color-italic'
+elif [[ $OS == "lin" ]]; then 
+  export ZSH_CUSTOM=/home/rlaney/.zsh
   export TERM='xterm-256color-italic'
 else
   export TERM='xterm-256color'
@@ -95,12 +97,12 @@ if [[ $OS == "mac" ]]; then
     )
   # Set the list of directories that Zsh searches for programs.
   path=(
-      $HOME/.poetry/bin
+      /Users/rlaney/.poetry/bin
       /usr/local/opt/coreutils/libexec/gnubin
       /usr/local/{bin,sbin}
       /Applications
-      $HOME/.go/bin
-      $HOME/.jenv/bin
+      /Users/rlaney/.go/bin
+      /Users/rlaney/.jenv/{bin,libexec}
       /Users/rlaney/{bin,lib,scripts}
       /opt/X11/bin
       /opt/cisco/anyconnect/bin
@@ -109,7 +111,7 @@ if [[ $OS == "mac" ]]; then
     )
   # load our own completions (~/.zsh/completion)
   fpath=(
-      $HOME/.zsh/completion
+      /Users/rlaney/.zsh/completion
       /usr/local/share/zsh/functions
       /usr/local/share/zsh/site-functions
       /usr/local/share/zsh-completions
@@ -131,6 +133,7 @@ elif [[ $OS == "lin" ]]; then
       /usr/share/virtualenvwrapper
       /usr/share/zsh/{function,help,vendor-completion}
       /home/rlaney/.local/bin
+      /home/rlaney/.jenv/{bin,libexec}
       /home/rlaney/{bin,lib,scripts}
       $path
     )
@@ -143,10 +146,10 @@ elif [[ $OS == "lin" ]]; then
 fi
     
     # Removed path:
-#    $HOME/.go/bin
-#    $HOME/.jenv/bin
-#    $HOME/.rvm/bin
-#    $HOME/.zsh/functions
+#    /Users/rlaney/.go/bin
+#    /Users/rlaney/.jenv/bin
+#    /Users/rlaney/.rvm/bin
+#    /Users/rlaney/.zsh/functions
 #    /usr/local/opt/node@8/bin
 #    /usr/local/opt/bzip2/bin
 #    /usr/local/opt/icu4c/bin
