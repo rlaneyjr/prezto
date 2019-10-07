@@ -53,6 +53,7 @@ zstyle ':prezto:load' pmodule \
   'editor' \
   'completion' \
   'spectrum' \
+  'git' \
   'rsync' \
   'archive' \
   'python' \
@@ -66,7 +67,6 @@ zstyle ':prezto:load' pmodule \
   'prompt'
 
 # Removed
-#'git' \
 #  'zsh-better-npm-completion' \
 #  'zsh-nvm' \
 #  'homebrew' \
