@@ -29,51 +29,6 @@
 # #   10. ~/.zlogout
 # #   11. /etc/zlogout
 # ########################################
-# We get the OS type to use throughout
-if [[ "$OSTYPE" == darwin* ]]; then
-  export OS="mac"
-  export HD="/Users/$USER"
-elif [[ "$OSTYPE" == linux* ]]; then
-  export OS="lin"
-  export HD="/home/$USER"
-fi
-########################################
-#            Load First                #
-########################################
-# Stuff that needs to be loaded first due to dependencies.
-if [[ -n $SSH_CONNECTION ]]; then
-  export TERM='screen-256color'
-else
-  export TERM='xterm-256color-italic'
-fi
-
-if [[ $OS == "mac" ]]; then 
-  export ZSH_CUSTOM=/Users/rlaney/.zsh
-  export BROWSER='open'
-elif [[ $OS == "lin" ]]; then 
-  export ZSH_CUSTOM=/home/rlaney/.zsh
-fi
-# export TERM='tmux-256color'
-# export TERM='screen-256color'
-
-# Make vim the default editor.
-export EDITOR='vim'
-export VISUAL='vim'
-export PAGER='less'
-
-# Language
-# Prefer US English and use UTF-8.
-if [[ -z "$LANG" ]]; then
-  export LANG='en_US.UTF-8'
-fi
-if [[ -z "$LC_ALL" ]]; then
-  export LC_ALL='en_US.UTF-8'
-fi
-# Set architecture flags
-if [[ -z "$ARCHFLAGS" ]]; then
-  export ARCHFLAGS='-arch x86_64'
-fi
-
 # Paths
 # Ensure path arrays do not contain duplicates.
   typeset -gU cdpath fpath mailpath path manpath
